@@ -1,0 +1,178 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat");
+
+:root {
+  --col1: #88daf7;
+  --col2: #0172b0;
+  --col3: #2a394f;
+  --col4: #212e41;
+  --cubic-1: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --cubic-2: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --grad: linear-gradient(135deg, var(--col1), var(--col2));
+  --shadow: 0 6px 16px darken(var(--col2), 10%);
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  min-height: 100vh;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+  font-family: "Montserrat", sans-serif;
+  background-color: var(--col1);
+  background: url(https://i.picsum.photos/id/1042/3456/5184.jpg?hmac=5xr8Veg2D_kEQQO6rvGj_Yk8s_N4iq3-eZ9_KclSXNQ) no-repeat center center / cover;
+}
+
+.hl {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: -1;
+  margin-top: -400px;
+  margin-left: -400px;
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(circle closest-side at 50%, rgba(var(--col1), .7), transparent);
+  transition: all 200ms linear;
+}
+
+.container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  perspective: 1000px;
+}
+
+.container .tl:hover ~ .card {
+  transform: rotateX(25deg) rotateY(-5deg);
+}
+
+.container .tc:hover ~ .card {
+  transform: rotateX(35deg);
+}
+
+.container .tr:hover ~ .card {
+  transform: rotateX(25deg) rotateY(5deg);
+}
+
+.container .cl:hover ~ .card {
+  transform: rotateY(-25deg);
+}
+
+.container .cr:hover ~ .card {
+  transform: rotateY(25deg);
+}
+
+.container .bl:hover ~ .card {
+  transform: rotateX(-25deg) rotateY(-15deg);
+}
+
+.container .bc:hover ~ .card {
+  transform: rotateX(-35deg);
+}
+
+.container .br:hover ~ .card {
+  transform: rotateX(-25deg) rotateY(15deg);
+}
+
+.card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -120px -200px;
+  perspective: 150rem;
+  width: 400px;
+  height: 240px;
+  cursor: pointer;
+  transition: all 500ms var(--cubic-1);
+}
+
+.card .front,
+.card .back {
+  position: absolute;
+  margin: auto;
+  padding: 2em;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  color: white;
+  transition: 500ms var(--cubic-2);
+}
+
+.card .front h2,
+.card .back h2 {
+  margin: 0;
+  text-transform: uppercase;
+  font-size: 1.75rem;
+}
+
+.card .front h4,
+.card .back h4 {
+  margin: 0.5em 0 1em;
+  font-size: 1rem;
+}
+
+.card .links {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.card a {
+  margin: 0.25em 0.5em;
+  text-decoration: none;
+  font-size: 2rem;
+  color: white;
+}
+
+.card .front {
+  z-index: 1;
+  align-items: center;
+  background-image: var(--grad);
+  box-shadow: var(--shadow), inset 0 0 15px var(--col1);
+}
+
+.card .back {
+  align-items: center;
+  background-image: var(--grad);
+  transform: rotateY(180deg);
+}
+
+#check {
+  display: none;
+}
+
+#check + label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -120px -200px;
+  z-index: 2;
+  width: 400px;
+  height: 240px;
+  cursor: pointer;
+}
+
+#check:checked + label ~ .card .front {
+  z-index: 0;
+  box-shadow: none;
+  transform: rotateY(-180deg);
+}
+
+#check:checked + label ~ .card .back {
+  box-shadow: var(--shadow), inset 0 0 15px var(--col1);
+  transform: rotateY(0deg);
+}
+
+
